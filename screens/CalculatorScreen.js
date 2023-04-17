@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import { StyleSheet, View, TextInput } from 'react-native';
-import StyledButton from '../components/StyledButton';
+import { StyleSheet, View, TextInput} from 'react-native';
+import {StyledButton, StyledButtonBlue, StyledButtonLongBlue, StyledButtonLongRed} from '../components/StyledButton';
 
 const CalculatorScreen = () => {
   const [display, setDisplay] = useState('0');
@@ -36,59 +36,70 @@ const CalculatorScreen = () => {
   };
 
   return (
-    <View style={styles.container} testID='calculator-screen'>
+    <View style={styles.subContainer} testID='calculator-screen'>
       <TextInput style={styles.result} value={display} editable={false} testID='calculator-input' />
-      <View style={styles.row}>
-        <StyledButton text='1' handler={handleNumberPress} />
-        <StyledButton text='2' handler={handleNumberPress} />
-        <StyledButton text='3' handler={handleNumberPress} />
-        <StyledButton text='+' handler={handleOperatorPress} />
-      </View>
-      <View style={styles.row}>
-        <StyledButton text='4' handler={handleNumberPress} />
-        <StyledButton text='5' handler={handleNumberPress} />
-        <StyledButton text='6' handler={handleNumberPress} />
-        <StyledButton text='-' handler={handleOperatorPress} />
-      </View>
-      <View style={styles.row}>
-        <StyledButton text='7' handler={handleNumberPress} />
-        <StyledButton text='8' handler={handleNumberPress} />
-        <StyledButton text='9' handler={handleNumberPress} />
-        <StyledButton text='*' handler={handleOperatorPress} />
-      </View>
-      <View style={styles.row}>
-        <StyledButton text='C' handler={handleClearPress} />
-        <StyledButton text='0' handler={handleNumberPress} />
-        <StyledButton text='=' handler={handleEqualPress} />
-        <StyledButton text='/' handler={handleOperatorPress} />
+      <View style={styles.buttonWrapper}>
+        <View style={styles.row}>
+          <StyledButton text='1' handler={handleNumberPress} />
+          <StyledButton text='2' handler={handleNumberPress} />
+          <StyledButton text='3' handler={handleNumberPress} />
+          <StyledButtonBlue text='+' handler={handleOperatorPress} />
+        </View>
+        <View style={styles.row}>
+          <StyledButton text='4' handler={handleNumberPress} />
+          <StyledButton text='5' handler={handleNumberPress} />
+          <StyledButton text='6' handler={handleNumberPress} />
+          <StyledButton text='-' handler={handleOperatorPress} />
+        </View>
+        <View style={styles.row}>
+          <StyledButton text='7' handler={handleNumberPress} />
+          <StyledButton text='8' handler={handleNumberPress} />
+          <StyledButton text='9' handler={handleNumberPress} />
+          <StyledButton text='*' handler={handleOperatorPress} />
+        </View>
+        <View style={styles.row}>
+          <StyledButton text='C' handler={handleClearPress} />
+          <StyledButton text='0' handler={handleNumberPress} />
+          <StyledButton text='=' handler={handleEqualPress} />
+          <StyledButton text='/' handler={handleOperatorPress} />
+        </View>
+        <View style={styles.row}>
+          <StyledButtonLongBlue text='C' handler={handleClearPress} />
+          <StyledButtonLongRed text='=' handler={handleEqualPress} />
+        </View>
       </View>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
+  subContainer: {
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#fff',
+  },
+  buttonWrapper: {
+    backgroundColor: 'hsl(223, 31%, 20%)', //Very dark desaturated blue
+    borderRadius: 5,
+    padding: 20,
+    paddingBottom: 10,
+    width: '80%',
   },
   result: {
     width: '80%',
     height: 80,
     fontSize: 30,
+    color: 'hsl(0, 0%, 100%)', //White
     textAlign: 'right',
-    marginBottom: 10,
-    borderWidth: 1,
-    borderColor: '#ccc',
+    fontWeight: 'bold',
+    marginBottom: 20,
+    backgroundColor: 'hsl(224, 36%, 15%)', //Very dark desaturated blue
     borderRadius: 5,
-    padding: 10,
+    padding: 20,
   },
   row: {
     flexDirection: 'row',
     justifyContent: 'space-around',
-    width: '80%',
-    marginBottom: 10,
+    marginBottom: 15,
   },
 });
 
