@@ -83,11 +83,13 @@ const styles = StyleSheet.create({
     color: 'hsl(221, 14%, 31%)', //Very dark grayish blue
     fontSize: 25,
     fontWeight: 'bold',
+    //fontFamily: 'LeagueSpartan-Bold',
   },
   buttonTextWhite: {
     color: 'hsl(0, 0%, 100%)', //White
-    fontSize: 25,
+    fontSize: 20,
     fontWeight: 'bold',
+    //fontFamily: 'LeagueSpartan-Bold',
   }
 });
 
