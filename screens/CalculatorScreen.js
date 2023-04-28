@@ -13,10 +13,8 @@ const CalculatorScreen = () => {
       return false;
     } else if (text.length > 12) {
       // Shrink the text when 12 characters are entered
-      //setDisplay(text.slice(0, 12));
       setFontSize(30); // Set the font size to a smaller value
     } else {
-      //setDisplay(text);
       setFontSize(45); // Set the font size back to the original value
     }
     return true;
@@ -50,7 +48,7 @@ const CalculatorScreen = () => {
   const handleOperatorPress = (operator) => {
     if (handleTextInput(memory + operator)){
       if (operator === 'x'){
-        //this is only necessary if the picture of the calculator is accurate in the rubric
+        //based on the picture in the rubric
         operator = '*';
       }
       setMemory(memory + operator);
