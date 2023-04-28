@@ -5,49 +5,73 @@ import {StyledButton, StyledButtonBlue, StyledButtonLongBlue, StyledButtonLongRe
 const CalculatorScreen = () => {
   const [display, setDisplay] = useState('0');
   const [memory, setMemory] = useState('');
+  const [fontSize, setFontSize] = useState(45); // Initialize font size to 45
+
+  const handleTextInput = (text) => {
+    if (text.length > 15) {
+      // Prevent more than 15 characters from being entered
+      return false;
+    } else if (text.length > 12) {
+      // Shrink the text when 12 characters are entered
+      //setDisplay(text.slice(0, 12));
+      setFontSize(30); // Set the font size to a smaller value
+    } else {
+      //setDisplay(text);
+      setFontSize(45); // Set the font size back to the original value
+    }
+    return true;
+  };
 
   // triggered when a number is pressed
   const handleNumberPress = (number) => {
-    if (display === '0') {
-      setDisplay(number);
-    } else {
-      setDisplay(display + number);
+    if (handleTextInput(memory + number)){
+      if (display === '0') {
+        setDisplay(number);
+      } else {
+        setDisplay(display + number);
+      }
+      setMemory(memory + number);
     }
-    setMemory(memory + number);
   };
 
   const handleDelete = () => {
-    if(memory.length <= 1){
-      handleClearPress();
-    } else {
-      var newMem = memory.slice(0, -1);
-      setDisplay(newMem);
-      setMemory(newMem);
+    if (handleTextInput(memory.slice(0, -1))){
+      if(memory.length <= 1){
+        handleClearPress();
+      } else {
+        var newMem = memory.slice(0, -1);
+        setDisplay(newMem);
+        setMemory(newMem);
+      }
     }
   };
 
   // triggered when an operator is pressed
   const handleOperatorPress = (operator) => {
-    if (operator === 'x'){
-      //this is only necessary if the picture of the calculator is accurate in the rubric
-      operator = '*';
+    if (handleTextInput(memory + operator)){
+      if (operator === 'x'){
+        //this is only necessary if the picture of the calculator is accurate in the rubric
+        operator = '*';
+      }
+      setMemory(memory + operator);
+      setDisplay(memory + operator);
     }
-    setMemory(memory + operator);
-    setDisplay(memory + operator);
   };
 
   // triggered when an decimal is pressed
   const handleDecimalPress = (decimal) => {
-    var mathWithTrailDec = memory + decimal + '0';
-    var mathWithLeadDec = memory + '0' + decimal + '0';
-    if (isValidMath(mathWithTrailDec)){
-      setMemory(memory + decimal);
-      setDisplay(memory + decimal);
+    if (handleTextInput(memory + decimal)){
+      var mathWithTrailDec = memory + decimal + '0';
+      var mathWithLeadDec = memory + '0' + decimal + '0';
+      if (isValidMath(mathWithTrailDec)){
+        setMemory(memory + decimal);
+        setDisplay(memory + decimal);
+      }
+      else if (isValidMath(mathWithLeadDec)){
+        setMemory(memory + '0' + decimal);
+        setDisplay(memory + '0' + decimal);
+      } 
     }
-    else if (isValidMath(mathWithLeadDec)){
-      setMemory(memory + '0' + decimal);
-      setDisplay(memory + '0' + decimal);
-    } 
   };
 
   // triggered when the equal sign is pressed
@@ -71,6 +95,7 @@ const CalculatorScreen = () => {
   const handleClearPress = () => {
     setDisplay('0');
     setMemory('');
+    setFontSize(45);
   };
 
   /* ========== CREDIT ==========
@@ -79,7 +104,7 @@ const CalculatorScreen = () => {
 
   const isValidMath = (s) => {
     // define the regular expression pattern
-    //regular expression for valid math equation without trailing decimal 
+    //regular expression for valid math equation without trailing decimal
     //const pattern = /^\s*\d+(\.\d+)?\s*([+\-*/]\s*\d+(\.\d+)?\s*)*$/;
 
     //modified regular expression to account for accidental decimal at the end of an expression
@@ -93,32 +118,14 @@ const CalculatorScreen = () => {
     return Boolean(match);
   }
 
-  /* const formatDisplay = (display) => {
-    //before every press, check that the display is only displaying a certain number of characters. If it is displaying more than 12 shrink the size of the font to allow for 3 more numbers. Only a maximum of 15 characters are allowed on screen at a time.
-    const inputRef = useRef(null);
-
-    // Modify the style of the TextInput using setNativeProps
-    if (display.length === 12) {
-      inputRef.current.setNativeProps({
-        style: { fontSize: 30 },
-      });
-    } else if (display.length > 15){
-      return;
-    }
-    return (
-      <TextInput
-        ref={inputRef}
-        style={styles.input}
-        value={display}
-        editable={false}
-        testID='calculator-input'
-      />
-    );
-  }; */
-
   return (
     <View style={styles.subContainer} testID='calculator-screen'>
-      <TextInput style={styles.result} value={display} editable={false} testID='calculator-input' />
+      <TextInput 
+        style={[styles.result, { fontSize: fontSize }]} // Pass the font size as a style prop
+        value={display} 
+        onChangeText={handleTextInput}
+        testID='calculator-input' 
+      />
       <View style={styles.buttonWrapper}>
         <View style={styles.row}>
           <StyledButton text='7' handler={handleNumberPress} />
@@ -168,11 +175,9 @@ const styles = StyleSheet.create({
   result: {
     width: '80%',
     height: 80,
-    fontSize: 40,
     color: 'hsl(0, 0%, 100%)', //White
     textAlign: 'right',
     fontFamily: 'LeagueSpartan-Bold',
-    //fontWeight: 'bold',
     marginBottom: 20,
     backgroundColor: 'hsl(224, 36%, 15%)', //Very dark desaturated blue
     borderRadius: 5,
