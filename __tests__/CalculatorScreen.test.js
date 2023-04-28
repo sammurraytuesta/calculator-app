@@ -102,5 +102,89 @@ describe('CalculatorScreen', () => {
     expect(calculatorInput.props.value).toBe('64');
   });
 
-  // you need to add more tests on possible user errors
+  // Start of student test cases
+
+  // test a user error case: too many numbers
+  it('should catch some user errors', () => {
+    const { getByText, getByTestId } = render(<CalculatorScreen />);
+    const calculatorInput = getByTestId('calculator-input');
+
+    fireEvent.press(getByText('9'));
+    fireEvent.press(getByText('9'));
+    fireEvent.press(getByText('9'));
+    fireEvent.press(getByText('9'));
+    fireEvent.press(getByText('9'));
+    fireEvent.press(getByText('9'));
+    fireEvent.press(getByText('9'));
+    fireEvent.press(getByText('9'));
+    fireEvent.press(getByText('9'));
+    fireEvent.press(getByText('9'));
+    fireEvent.press(getByText('9'));
+    fireEvent.press(getByText('9'));
+    fireEvent.press(getByText('9'));
+    fireEvent.press(getByText('9'));
+    fireEvent.press(getByText('9'));
+    fireEvent.press(getByText('9'));
+    fireEvent.press(getByText('9'));
+    fireEvent.press(getByText('='));
+
+    expect(calculatorInput.props.value).toBe('999999999999999');
+  });
+
+  // test a user error case: decimal placement
+  it('should catch some user errors', () => {
+    const { getByText, getByTestId } = render(<CalculatorScreen />);
+    const calculatorInput = getByTestId('calculator-input');
+
+    fireEvent.press(getByText('.'));
+    fireEvent.press(getByText('9'));
+    fireEvent.press(getByText('.'));
+    fireEvent.press(getByText('8'));
+    fireEvent.press(getByText('='));
+
+    expect(calculatorInput.props.value).toBe('0.98');
+  });
+
+  // test a user error case: ending decimal
+  it('should catch some user errors', () => {
+    const { getByText, getByTestId } = render(<CalculatorScreen />);
+    const calculatorInput = getByTestId('calculator-input');
+
+    fireEvent.press(getByText('8'));
+    fireEvent.press(getByText('9'));
+    fireEvent.press(getByText('.'));
+    fireEvent.press(getByText('='));
+
+    expect(calculatorInput.props.value).toBe('89');
+  });
+
+  // test a user error case: leading zeros
+  it('should catch some user errors', () => {
+    const { getByText, getByTestId } = render(<CalculatorScreen />);
+    const calculatorInput = getByTestId('calculator-input');
+
+    fireEvent.press(getByText('0'));
+    fireEvent.press(getByText('9'));
+    fireEvent.press(getByText('+'));
+    fireEvent.press(getByText('0'));
+    fireEvent.press(getByText('0'));
+    fireEvent.press(getByText('5'));
+    fireEvent.press(getByText('='));
+
+    expect(calculatorInput.props.value).toBe('14');
+  });
+
+  // test a user error case: dividing by zero
+  it('should catch some user errors', () => {
+    const { getByText, getByTestId } = render(<CalculatorScreen />);
+    const calculatorInput = getByTestId('calculator-input');
+
+    fireEvent.press(getByText('9'));
+    fireEvent.press(getByText('/'));
+    fireEvent.press(getByText('0'));
+    fireEvent.press(getByText('='));
+
+    expect(calculatorInput.props.value).toBe('Error');
+  });
+
 });
