@@ -1,7 +1,7 @@
 [![Open in Codespaces](https://classroom.github.com/assets/launch-codespace-7f7980b617ed060a017424585567c406b6ee15c891e84e1186181d67ecf80aa0.svg)](https://classroom.github.com/open-in-codespaces?assignment_repo_id=10798847)
 # Lab 2
 
-Your name: XXX (replace with your name)
+Samantha Murray Tuesta
 
 ## Code base
 
@@ -41,6 +41,11 @@ Please read more in [the style guide](./style-guide.md) about the specs of our d
 An example of calculation with this design is as following:
 
 ![design2](./design/calculation-example.png)
+
+# Simulated App
+Simulated Calculator Code application on a iPhone 14 Pro Max
+
+<img width="375px" src="./design/simulated-app.png"/>
 
 ## To do
 
