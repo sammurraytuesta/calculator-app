@@ -5,7 +5,7 @@ import {StyledButton, StyledButtonBlue, StyledButtonLongBlue, StyledButtonLongRe
 const CalculatorScreen = () => {
   const [display, setDisplay] = useState('0');
   const [memory, setMemory] = useState('');
-  const [fontSize, setFontSize] = useState(45); // Initialize font size to 45
+  const [fontSize, setFontSize] = useState(45);
 
   const handleTextInput = (text) => {
     if (text.length > 15) {
@@ -13,9 +13,9 @@ const CalculatorScreen = () => {
       return false;
     } else if (text.length > 12) {
       // Shrink the text when 12 characters are entered
-      setFontSize(30); // Set the font size to a smaller value
+      setFontSize(30); // Set the font size to 30
     } else {
-      setFontSize(45); // Set the font size back to the original value
+      setFontSize(45); // Set the font size back to 45
     }
     return true;
   };
@@ -44,15 +44,25 @@ const CalculatorScreen = () => {
     }
   };
 
+  /* ========== CREDIT ==========
+   * "if (/[- + * /]$/.test(memory))" achieved by help from ChatGPT 
+   * both the regular expression and use of .test function to check for duplicate operator use were recommended by ChatGPT
+   * */
+
   // triggered when an operator is pressed
   const handleOperatorPress = (operator) => {
-    if (handleTextInput(memory + operator)){
-      if (operator === 'x'){
-        //based on the picture in the rubric
+    if (handleTextInput(memory + operator)) {
+      if (operator === 'x') {
         operator = '*';
       }
-      setMemory(memory + operator);
-      setDisplay(memory + operator);
+      var newMemory;
+      if (/[-+*/]$/.test(memory)) { // Check if the last character is an operator
+        newMemory = memory.slice(0, -1) + operator; // Remove the last operator and add the new one
+      } else {
+        newMemory = memory + operator;
+      }
+      setMemory(newMemory);
+      setDisplay(newMemory);
     }
   };
 
@@ -93,6 +103,7 @@ const CalculatorScreen = () => {
   const handleClearPress = () => {
     setDisplay('0');
     setMemory('');
+    //set font size back to 45
     setFontSize(45);
   };
 
