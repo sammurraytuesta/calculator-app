@@ -53,7 +53,7 @@ describe('CalculatorScreen', () => {
     const calculatorInput = getByTestId('calculator-input');
 
     fireEvent.press(getByText('3'));
-    fireEvent.press(getByText('*'));
+    fireEvent.press(getByText('x')); //modified to match picture of calc
     fireEvent.press(getByText('4'));
     fireEvent.press(getByText('='));
 
@@ -95,7 +95,7 @@ describe('CalculatorScreen', () => {
 
     fireEvent.press(getByText('8'));
     fireEvent.press(getByText('+'));
-    fireEvent.press(getByText('*'));
+    fireEvent.press(getByText('x'));
     fireEvent.press(getByText('8'));
     fireEvent.press(getByText('='));
 
