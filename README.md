@@ -1,7 +1,7 @@
 # Calculator App
 A simple Calculator application simulated on an iPhone 14 Pro Max developed as part of a Mobile Application Development Course through Western Washington University.
 
-[![made-with-React-Native](https://img.shields.io/badge/Made%20with-React%20Native-1f425f.svg)](https://reactnative.dev/) [![made-with-Expo](https://img.shields.io/badge/Made%20with-Expo-1f425f.svg)](https://expo.dev/) [![macOS](https://svgshare.com/i/ZjP.svg)](https://svgshare.com/i/ZjP.svg) [![GitHub](https://badgen.net/badge/icon/github?icon=github&label)](https://github.com/sammurraytuesta)
+[![made-with-React-Native](https://img.shields.io/badge/Made%20with-React%20Native-1f425f.svg)](https://reactnative.dev/) [![made-with-Expo](https://img.shields.io/badge/Made%20with-Expo-1f425f.svg)](https://expo.dev/) [![macOS](https://img.shields.io/badge/os-macOS-green.svg)](https://img.shields.io/badge/os-macOS-green.svg) [![GitHub](https://badgen.net/badge/icon/github?icon=github&label)](https://github.com/sammurraytuesta)
 
 <!-- TABLE OF CONTENTS -->
 <details>
